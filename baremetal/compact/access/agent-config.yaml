@@ -1,0 +1,92 @@
+---
+apiVersion: v1beta1
+kind: AgentConfig
+metadata:
+  name: ocp-1
+rendezvousIP: 192.168.0.20
+additionalNTPSources: 
+- 0.pool.ntp.org
+- 1.pool.ntp.org
+- 2.pool.ntp.org
+hosts:
+  - hostname: master-0
+    interfaces:
+      - name: eno1
+        macAddress: 52:54:00:12:34:5a
+    rootDeviceHints:
+      deviceName: /dev/sda
+    networkConfig:
+      interfaces:
+        - name: eno1
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: 192.168.0.20
+                prefix-length: 24
+            dhcp: false
+      dns-resolver:
+        config:
+          server:
+            - 1.1.1.1
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: 192.168.0.1
+            next-hop-interface: eno1
+            table-id: 254
+  - hostname: master-1
+    interfaces:
+      - name: eno1
+        macAddress: 52:54:00:65:43:21
+    rootDeviceHints:
+      deviceName: /dev/sda
+    networkConfig:
+      interfaces:
+        - name: eno1
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: 192.168.0.21
+                prefix-length: 24
+            dhcp: false
+      dns-resolver:
+        config:
+          server:
+            - 1.1.1.1
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: 192.168.0.1
+            next-hop-interface: eno1
+            table-id: 254
+  - hostname: master-2
+    interfaces:
+      - name: eno1
+        macAddress: 52:54:00:ab:cd:ef
+    rootDeviceHints:
+      deviceName: /dev/sda
+    networkConfig:
+      interfaces:
+        - name: eno1
+          type: ethernet
+          state: up
+          ipv4:
+            enabled: true
+            address:
+              - ip: 192.168.0.22
+                prefix-length: 24
+            dhcp: false
+      dns-resolver:
+        config:
+          server:
+            - 1.1.1.1
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: 192.168.0.1
+            next-hop-interface: eno1
+            table-id: 254
