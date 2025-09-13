@@ -1,0 +1,42 @@
+---
+apiVersion: v1 # Specifies the version of the install-config API schema.
+baseDomain: example.com # The base DNS domain for the cluster; all subdomains for the cluster will be created under this.
+compute: # Defines the worker nodes. Includes architecture, hyperthreading, node type, and number of replicas (nodes).
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  replicas: 0
+controlPlane: # Defines the master nodes (control plane). Includes architecture, hyperthreading, node type, and number of replicas.
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+metadata: # Contains metadata about the cluster, such as its name.
+  name: ocp-1
+networking: # Specifies cluster networking configuration.
+  clusterNetwork: # The CIDR for pod networking and the subnet size for each node.
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork: # The CIDR for the network where cluster machines are located.
+  - cidr: 192.168.0.0/24
+  networkType: OVNKubernetes # The network plugin type (e.g., OVNKubernetes).
+  serviceNetwork: # The CIDR for service IPs.
+  - 172.30.0.0/16
+platform: # Specifies the platform for installation.
+  baremetal:
+    apiVIPs: # Virtual IP address for the Kubernetes API endpoint.
+    - 192.168.1.11
+    ingressVIPs: # Virtual IP address for ingress (external access to services).
+    - 192.168.1.10
+    hosts: # List of hosts with their name, role, and boot MAC address.
+    - name: master-0
+      role: master
+      bootMACAddress: 52:54:00:12:34:5a
+    - name: master-1
+      role: master
+      bootMACAddress: 52:54:00:65:43:21
+    - name: master-2
+      role: master
+      bootMACAddress: 52:54:00:ab:cd:ef
+pullSecret: '<add red hat pull secret here>' # Red Hat OpenShift pull secret for accessing container images.
+sshKey: 'add ssh key here' # SSH public key to enable SSH access to nodes.
