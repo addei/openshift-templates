@@ -23,6 +23,14 @@ networking:
   serviceNetwork:
   - 172.30.0.0/16
 platform:
-  none: {}
+  baremetal:
+    apiVIPs: # Virtual IP address for the Kubernetes API endpoint.
+    - 192.168.100.11
+    ingressVIPs: # Virtual IP address for ingress (external access to services).
+    - 192.168.100.10
+    hosts: # List of hosts with their name, role, and boot MAC address.
+    - name: master-0
+      role: master
+      bootMACAddress: 52:54:00:12:34:5a
 pullSecret: '<pull_secret>'
 sshKey: '<ssh_pub_key>'
