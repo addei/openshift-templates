@@ -10,7 +10,7 @@ hosts:
       - name: eno1
         macAddress: 00:ef:44:21:e6:a5
     rootDeviceHints:
-      deviceName: /dev/vdb
+      deviceName: /dev/sda
     networkConfig:
       interfaces:
         - name: eno1
