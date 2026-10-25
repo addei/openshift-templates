@@ -4,6 +4,10 @@ kind: AgentConfig
 metadata:
   name: sno-cluster
 rendezvousIP: 192.168.100.10
+additionalNTPSources: 
+- 0.pool.ntp.org
+- 1.pool.ntp.org
+- 2.pool.ntp.org
 hosts:
   - hostname: master-0
     interfaces:
