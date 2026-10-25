@@ -326,6 +326,14 @@ Once all prerequisites are met and the agent ISO is created and distributed to y
 	- The installer will configure the cluster, set up networking, and deploy all required OpenShift components.
 	- Once complete, the kubeconfig file will be available in your working directory (e.g., `okd-install/auth/kubeconfig`).
   - Password for temporary admin user (```kubeadmin```) is in the file (`okd-install/auth/kubeadmin-password`)
+  - **Installer logs:** The installer prints progress to the terminal. You can also tail the log file:
+    ```sh
+    tail -f okd-install/.openshift_install.log
+    ```
+  - **Bootstrap status:** Check if bootstrap is complete:
+    ```sh
+    openshift-install --dir okd-install wait-for bootstrap-complete --log-level=debug
+    ```
 
 4. **Access the cluster**
 	- Use the `oc` CLI with the generated kubeconfig to verify cluster status:
